@@ -1,15 +1,23 @@
 import React from "react";
 import api from "../lib/axios";
-import { googlePopupLogin } from "../firebase";   
+import { googlePopupLogin } from "../firebase";
 import { FcGoogle } from "react-icons/fc";
 
 const LoginPage = () => {
-
   const handleGoogleLogin = async () => {
     try {
+      // Step 1: Firebase Google login
       const { user, token: firebaseToken } = await googlePopupLogin();
-      const res = await api.post("/api/auth/google", { token: firebaseToken });
+
+      // Step 2: Send token to backend
+      const res = await api.post("/auth/google", {
+        token: firebaseToken,
+      });
+
+      // Step 3: Save JWT token
       localStorage.setItem("token", res.data.token);
+
+      // Step 4: Redirect
       window.location.href = "/";
     } catch (err) {
       console.log("Google login error:", err);
