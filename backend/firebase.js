@@ -5,7 +5,7 @@ let serviceAccount = null;
 try {
   serviceAccount = JSON.parse(process.env.FIREBASE_ADMIN_KEY);
 } catch (e) {
-  console.error("❌ Firebase key parse error:", e);
+  console.error(" Firebase key parse error:", e);
 }
 
 if (!admin.apps.length) {
