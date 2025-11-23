@@ -1,18 +1,14 @@
 import axios from "axios";
 
-const BASE_URLS = {
-  development: "http://localhost:5001/api",
-  production: "https://task46.onrender.com/api",
-};
+const BASE_URL =
+  import.meta.env.MODE === "development"
+    ? "http://localhost:5001/api"
+    : `${import.meta.env.VITE_API_URL}/api`;
 
 const api = axios.create({
-  baseURL:
-    process.env.NODE_ENV === "development"
-      ? BASE_URLS.development
-      : BASE_URLS.production,
+  baseURL: BASE_URL,
 });
 
-// Attach token automatically
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
   if (token) {
