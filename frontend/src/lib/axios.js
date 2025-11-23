@@ -4,7 +4,6 @@ const api = axios.create({
   baseURL: "https://task46.onrender.com/api",
 });
 
-// Attach token automatically
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
   if (token) {
