@@ -1,5 +1,5 @@
 import React from "react";
-import api from "../lib/axios";
+import api from "../lib/axios.js";
 import { googlePopupLogin } from "../firebase";
 import { FcGoogle } from "react-icons/fc";
 
