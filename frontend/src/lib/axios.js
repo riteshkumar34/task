@@ -2,7 +2,8 @@ import axios from "axios";
 
 const BASE_URLS = [
   "http://localhost:5001/api",
-  "https://taskmanager-4-x5eq.onrender.com/api"
+  "https://taskmanager-4-x5eq.onrender.com/api",
+  "https://task46.onrender.com/"
 ];
 
 const api = axios.create({
