@@ -1,10 +1,17 @@
 import admin from "firebase-admin";
-import fs from "fs";
 
-const serviceAccount = JSON.parse(fs.readFileSync(new URL("./serviceAccountKey.json", import.meta.url)));
+let serviceAccount = null;
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
-});
+try {
+  serviceAccount = JSON.parse(process.env.FIREBASE_ADMIN_KEY);
+} catch (e) {
+  console.error("❌ Firebase key parse error:", e);
+}
+
+if (!admin.apps.length) {
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount)
+  });
+}
 
 export default admin;
