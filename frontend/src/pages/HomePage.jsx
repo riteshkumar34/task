@@ -8,6 +8,14 @@ const HomePage = () => {
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // 🔥 Protect Route
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      window.location.href = "/login";
+    }
+  }, []);
+
   useEffect(() => {
     const fetchNotes = async () => {
       try {
