@@ -14,10 +14,10 @@ const LoginPage = () => {
         token: firebaseToken,
       });
 
-      // Step 3: Save JWT token
+      
       localStorage.setItem("token", res.data.token);
 
-      // Step 4: Redirect
+      
       window.location.href = "/";
     } catch (err) {
       console.log("Google login error:", err);
