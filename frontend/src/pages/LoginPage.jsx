@@ -8,7 +8,7 @@ const LoginPage = () => {
   const handleGoogleLogin = async () => {
     try {
       const { user, token: firebaseToken } = await googlePopupLogin();
-      const res = await api.post("/auth/google", { token: firebaseToken });
+      const res = await api.post("/api/auth/google", { token: firebaseToken });
       localStorage.setItem("token", res.data.token);
       window.location.href = "/";
     } catch (err) {
