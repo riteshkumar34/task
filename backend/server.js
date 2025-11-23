@@ -19,7 +19,8 @@ app.use(
       "http://localhost:5173",
       "http://localhost:5174",
       "https://task-manager-tau-mauve.vercel.app",
-      "https://task-manager-git-main-riteshkumar34s-projects.vercel.app"
+      "https://task-manager-git-main-riteshkumar34s-projects.vercel.app",
+      "https://task-git-dev-riteshkumar34s-projects.vercel.app/"
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
