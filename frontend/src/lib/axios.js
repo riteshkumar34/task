@@ -1,18 +1,20 @@
 import axios from "axios";
 
-const BASE_URLS = [
-  "http://localhost:5001/api",
-  "https://taskmanager-4-x5eq.onrender.com/api",
-  "https://task46.onrender.com/"
-];
+const BASE_URLS = {
+  development: "http://localhost:5001/api",
+  production: "https://task46.onrender.com/api",
+};
 
 const api = axios.create({
-  baseURL: process.env.NODE_ENV === "development" ? BASE_URLS[0] : BASE_URLS[1],
+  baseURL:
+    process.env.NODE_ENV === "development"
+      ? BASE_URLS.development
+      : BASE_URLS.production,
 });
 
-// Interceptor: JWT attach
-api.interceptors.request.use(config => {
-  const token = localStorage.getItem("token"); // aapka JWT
+// Attach token automatically
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
