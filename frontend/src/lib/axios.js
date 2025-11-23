@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL + "/api",
+  baseURL: "https://task46.onrender.com/api",  // ← Direct URL (no import.meta)
 });
 
 api.interceptors.request.use((config) => {
