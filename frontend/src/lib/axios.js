@@ -1,10 +1,10 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL + "/api",
+  baseURL: "https://task46.onrender.com/api",
 });
 
-// Token automatically send karega
+// Attach token automatically
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
   if (token) {
