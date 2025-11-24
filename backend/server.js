@@ -10,9 +10,9 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5001;
 
-
 app.use(express.json());
 
+// --- CORS configuration ---
 app.use(
   cors({
     origin: [
@@ -20,7 +20,8 @@ app.use(
       "http://localhost:5174",
       "https://task-manager-tau-mauve.vercel.app",
       "https://task-manager-git-main-riteshkumar34s-projects.vercel.app",
-      "https://task-git-dev-riteshkumar34s-projects.vercel.app"
+      "https://task-git-dev-riteshkumar34s-projects.vercel.app",
+      "https://task-six-beryl.vercel.app" // ← Add this for Vercel frontend
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
@@ -28,12 +29,12 @@ app.use(
 );
 
 // --- Routes ---
-app.use("/api/notes", notesRoutes);  // Notes CRUD
-app.use("/api/auth", authRoutes);        // Google Login Backend Route
+app.use("/api/notes", notesRoutes);  
+app.use("/api/auth", authRoutes);        
 
 // --- Start Server ---
 connectDB().then(() => {
   app.listen(PORT, () => {
-    console.log(` Server running on PORT ${PORT}`);
+    console.log(`Server running on PORT ${PORT}`);
   });
 });
