@@ -1,9 +1,9 @@
 import React from 'react';
 import {  Routes, Route } from 'react-router-dom';
-import HomePage from './pages/HomePage';
+import HomePage from './pages/HomePage.jsx';
 import CreatePage from './pages/CreatePage';
-import NoteDetailPage from './pages/NoteDetailPage';
-import LoginPage from './pages/LoginPage';
+import NoteDetailPage from './pages/NoteDetailPage.jsx';
+import LoginPage from './pages/LoginPage.jsx';
 
 const App = () => {
   return (

@@ -22,8 +22,8 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-200 via-purple-200 to-pink-200">
-      <div className="bg-white shadow-2xl p-10 rounded-3xl w-full max-w-md text-center transform transition-transform hover:scale-105 hover:shadow-3xl">
+    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-200 via-purple-200 to-pink-200 px-4">
+      <div className="bg-white shadow-2xl p-10 rounded-3xl w-full max-w-md text-center transform transition-transform duration-300 hover:scale-105 hover:shadow-3xl">
         <h1 className="text-4xl font-extrabold mb-4 text-gray-900">Task Manager</h1>
         <p className="text-gray-500 mb-8">
           Sign in with your Google account to manage your tasks efficiently.
@@ -41,7 +41,10 @@ const LoginPage = () => {
         </button>
 
         <p className="mt-6 text-gray-400 text-sm">
-          By logging in, you agree to our <span className="underline">Terms & Conditions</span>
+          By logging in, you agree to our{" "}
+          <span className="underline cursor-pointer hover:text-gray-700">
+            Terms & Conditions
+          </span>
         </p>
       </div>
     </div>
