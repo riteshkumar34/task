@@ -23,9 +23,16 @@ const app = initializeApp(firebaseConfig);
 
 // Firebase Auth Setup
 export const auth = getAuth(app);
+
+// Google provider
 const provider = new GoogleAuthProvider();
 
-// Google Popup Login Function (important)
+// Prevent COOP popup errors
+provider.setCustomParameters({
+  prompt: "select_account" // always ask account → no silent fail
+});
+
+// 🔥 Optimized popup login function
 export const googlePopupLogin = async () => {
   try {
     const result = await signInWithPopup(auth, provider);
@@ -34,8 +41,22 @@ export const googlePopupLogin = async () => {
     const token = await user.getIdToken();
 
     return { user, token };
+
   } catch (error) {
-    console.error("Google login error:", error);
-    throw error;
+    // Handle popup closed by user → NO ERROR THROW
+    if (error.code === "auth/popup-closed-by-user") {
+      console.warn("User closed popup manually.");
+      return null; // Return null instead of throwing
+    }
+
+    // Handle popup blocked
+    if (error.code === "auth/popup-blocked") {
+      console.warn("Popup blocked by browser.");
+      return null;
+    }
+
+    // Other errors (network etc)
+    console.error("Unexpected Google login error:", error);
+    return null;
   }
 };

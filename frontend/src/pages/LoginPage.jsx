@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import api from "../lib/axios.js";
+import api from "../lib/axios";
 import { googlePopupLogin } from "../firebase";
 import { FcGoogle } from "react-icons/fc";
 
@@ -9,13 +9,31 @@ const LoginPage = () => {
   const handleGoogleLogin = async () => {
     if (loading) return;
     setLoading(true);
+
     try {
-      const { token: firebaseToken } = await googlePopupLogin();
+      // 🔥 popup login
+      const result = await googlePopupLogin();
+
+      // ⛔ If popup closed or blocked → result = null
+      if (!result) {
+        console.warn("Popup closed or blocked.");
+        setLoading(false);
+        return;
+      }
+
+      // Firebase token
+      const firebaseToken = result.token;
+
+      // 🔥 Send to backend
       const res = await api.post("/auth/google", { token: firebaseToken });
+
+      // Save token locally
       localStorage.setItem("token", res.data.token);
+
+      // Redirect to home
       window.location.href = "/";
     } catch (err) {
-      console.log("Google login error:", err);
+      console.error("Google login error:", err);
     } finally {
       setLoading(false);
     }
@@ -24,7 +42,9 @@ const LoginPage = () => {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-200 via-purple-200 to-pink-200 px-4">
       <div className="bg-white shadow-2xl p-10 rounded-3xl w-full max-w-md text-center transform transition-transform duration-300 hover:scale-105 hover:shadow-3xl">
+        
         <h1 className="text-4xl font-extrabold mb-4 text-gray-900">Task Manager</h1>
+
         <p className="text-gray-500 mb-8">
           Sign in with your Google account to manage your tasks efficiently.
         </p>
