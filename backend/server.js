@@ -11,6 +11,11 @@ const app = express();
 const PORT = process.env.PORT || 5001;
 
 app.use(express.json());
+app.use((req, res, next) => {
+  res.setHeader("Cross-Origin-Opener-Policy", "unsafe-none");
+  res.setHeader("Cross-Origin-Embedder-Policy", "unsafe-none");
+  next();
+});
 
 // --- CORS configuration ---
 app.use(
