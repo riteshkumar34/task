@@ -5,11 +5,18 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   plugins: [
     react(),
-    tailwindcss(), // Tailwind plugin
+    tailwindcss(),
   ],
+
   server: {
     fs: {
       strict: false,
     },
-  },
+
+    // 🔥 Add this to disable COOP in dev mode
+    headers: {
+      "Cross-Origin-Opener-Policy": "unsafe-none",
+      "Cross-Origin-Embedder-Policy": "unsafe-none"
+    }
+  }
 });
